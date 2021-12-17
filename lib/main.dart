@@ -1,5 +1,6 @@
 import 'package:battery_level_app/ios_native_service/ios_native_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,7 +16,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print(batteryLevel);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
@@ -33,12 +33,11 @@ class _MyAppState extends State<MyApp> {
                 height: 50,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      final batteryLevel = IosNativeService.getBatteryLevel();
-                    });
+                  onPressed: () async {
+                    batteryLevel = await IosNativeService.getBatteryLevel();
+                    setState(() {});
                   },
-                  child: const Text('Get battery level'))
+                  child: Text('Get battery level')),
             ],
           ),
         ),

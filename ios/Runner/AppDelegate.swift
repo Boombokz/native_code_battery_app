@@ -12,8 +12,7 @@ import Flutter
       let METHOD_CHANNEL_NAME = "battery_level_app/battery"
       
       let batteryChannel = FlutterMethodChannel (
-        name:METHOD_CHANNEL_NAME,
-        
+        name: METHOD_CHANNEL_NAME,
         binaryMessenger: controller.binaryMessenger)
       
       batteryChannel.setMethodCallHandler(
@@ -22,10 +21,10 @@ import Flutter
             switch call.method {
             case "getBatteryLevel":
                 guard let args = call.arguments as? [String: String] else {return}
-                let name = args["testArguments"] ?? ""
+                let name = args["name"]!
                 
-                self.receiveBatteryLevel()
-            default:
+               result(self.receiveBatteryLevel()) 
+            default: 
                 result(FlutterMethodNotImplemented)
             }
         }
