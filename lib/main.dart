@@ -1,4 +1,3 @@
-import 'package:battery_level_app/logic/platform_channels_service.dart';
 import 'package:battery_level_app/ui/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       home: HomeScreen(),

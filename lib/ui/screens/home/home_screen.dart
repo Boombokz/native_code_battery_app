@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:battery_level_app/logic/platform_channels_service.dart';
 import 'package:flutter/material.dart';
 
@@ -42,20 +40,35 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             StreamBuilder(
-                stream: streamController.stream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Text(snapshot.data.toString());
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                }),
+              stream: streamController.stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data.toString());
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
+            ),
             const SizedBox(
               height: 50,
             ),
             ElevatedButton(
               onPressed: () => getCurrentBatteryLevel(),
               child: const Text('Get battery level'),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            StreamBuilder(
+              stream: PlatformChannelService.chargingChannel
+                  .receiveBroadcastStream(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data.toString());
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
             ),
           ],
         ),
