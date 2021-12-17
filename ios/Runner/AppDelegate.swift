@@ -23,7 +23,7 @@ import Flutter
                 guard let args = call.arguments as? [String: String] else {return}
                 let name = args["name"]!
                 
-               result(self.receiveBatteryLevel()) 
+               result("\(name) \(self.receiveBatteryLevel())") 
             default: 
                 result(FlutterMethodNotImplemented)
             }
